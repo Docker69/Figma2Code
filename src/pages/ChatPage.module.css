@@ -1,0 +1,6 @@
+.chatpage {
+  position: relative;
+  background-color: var(--light-background-default);
+  width: 100%;
+  height: 1024px;
+}

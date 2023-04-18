@@ -1,0 +1,67 @@
+.starfilledIcon {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.icon {
+  display: none;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.button {
+  position: relative;
+}
+.container {
+  display: flex;
+  flex-direction: row;
+  padding: var(--padding-4xs) var(--padding-base);
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-7xs);
+  z-index: 0;
+}
+.line {
+  position: absolute;
+  margin: 0 !important;
+  width: calc(100% + 2px);
+  right: -1px;
+  bottom: -1px;
+  left: -1px;
+  border-top: 2px solid var(--light-primary-main);
+  box-sizing: border-box;
+  height: 2px;
+  flex-shrink: 0;
+  z-index: 1;
+}
+.tab {
+  align-self: stretch;
+  flex-direction: column;
+  position: relative;
+}
+.container1,
+.tab,
+.tab1,
+.tabs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.container1 {
+  flex-direction: row;
+  padding: var(--padding-4xs) var(--padding-base);
+  gap: var(--gap-7xs);
+}
+.tab1,
+.tabs {
+  align-self: stretch;
+  flex-direction: column;
+}
+.tabs {
+  overflow: hidden;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+}

@@ -1,0 +1,32 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+
+body {
+  margin: 0;
+  line-height: normal;
+}
+:root {
+  /* fonts */
+  --main-header: Roboto;
+
+  /* font sizes */
+  --main-header-size: 40px;
+
+  /* Colors */
+  --light-background-default: #fff;
+  --color-gray: rgba(255, 255, 255, 0);
+  --light-primary-main: #1976d2;
+  --color-black: #000;
+
+  /* Gaps */
+  --gap-7xs: 6px;
+  --gap-9xs: 4px;
+
+  /* Paddings */
+  --padding-4xs: 9px;
+  --padding-base: 16px;
+  --padding-5xs: 8px;
+  --padding-3xs: 10px;
+  --padding-mid: 17px;
+  --padding-2xl: 21px;
+}

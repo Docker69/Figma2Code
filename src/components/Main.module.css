@@ -1,0 +1,29 @@
+.helloMrRoboto {
+  position: relative;
+  letter-spacing: 0.4px;
+  line-height: 34px;
+  text-transform: capitalize;
+}
+.helloMrRobotoWrapper,
+.main {
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  padding: var(--padding-mid) var(--padding-2xl);
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.main {
+  position: absolute;
+  height: calc(100% - 64px);
+  top: 64px;
+  bottom: 0;
+  left: calc(50% - 472px);
+  width: 1192px;
+  padding: var(--padding-3xs);
+  box-sizing: border-box;
+  text-align: left;
+  font-size: var(--main-header-size);
+  color: var(--color-black);
+  font-family: var(--main-header);
+}
