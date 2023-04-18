@@ -14,14 +14,9 @@
   justify-content: flex-start;
 }
 .main {
-  position: absolute;
-  height: calc(100% - 64px);
-  top: 64px;
-  bottom: 0;
-  left: calc(50% - 472px);
-  width: 1192px;
+  align-self: stretch;
+  flex: 1;
   padding: var(--padding-3xs);
-  box-sizing: border-box;
   text-align: left;
   font-size: var(--main-header-size);
   color: var(--color-black);
