@@ -1,0 +1,44 @@
+.startTyping {
+  flex: 1;
+  position: relative;
+  line-height: 20px;
+}
+.startTypingWrapper {
+  flex: 1;
+  border-radius: var(--br-sm);
+  border: 1px solid var(--color-silver);
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  padding: var(--padding-sm) var(--padding-mid) var(--padding-sm)
+    var(--padding-mini);
+  align-items: center;
+  justify-content: flex-start;
+}
+.paperAirplaneIcon {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.footer,
+.paperAirplaneWrapper {
+  display: flex;
+  flex-direction: row;
+  padding: var(--padding-base) var(--padding-xs);
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.footer {
+  align-self: stretch;
+  background-color: var(--light-background-default);
+  box-shadow: var(--border-shadow-top);
+  padding: var(--padding-10xs) var(--padding-61xl);
+  align-items: center;
+  gap: var(--gap-sm);
+  text-align: left;
+  font-size: var(--font-size-sm);
+  color: var(--text-gray);
+  font-family: var(--font-epilogue);
+}
