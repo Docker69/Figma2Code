@@ -1,4 +1,4 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent, useContext, useState } from "react";
 import {
   AppBar,
   Avatar,
@@ -12,38 +12,115 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import React from "react";
+import { ChatContext, SET_DRAWER_STATE } from "../context/ChatProvider";
 
-const pages = ["Products", "Pricing", "Blog"];
+interface NavigationMenuProps {
+  pages: string[];
+  anchorEl: HTMLElement | null;
+  onClose: () => void;
+}
+
+const NavigationMenu: FunctionComponent<NavigationMenuProps> = ({
+  pages,
+  anchorEl,
+  onClose,
+}) => (
+  <Menu
+    id="menu-appbar"
+    anchorEl={anchorEl}
+    anchorOrigin={{
+      vertical: "bottom",
+      horizontal: "left",
+    }}
+    keepMounted
+    transformOrigin={{
+      vertical: "top",
+      horizontal: "left",
+    }}
+    open={Boolean(anchorEl)}
+    onClose={onClose}
+    sx={{
+      display: { xs: "block", md: "none" },
+    }}
+  >
+    {pages.map((page) => (
+      <MenuItem key={page} onClick={onClose}>
+        <Typography textAlign="center">{page}</Typography>
+      </MenuItem>
+    ))}
+  </Menu>
+);
+
+interface UserMenuProps {
+  settings: string[];
+  anchorEl: HTMLElement | null;
+  onClose: () => void;
+}
+
+const UserMenu: FunctionComponent<UserMenuProps> = ({
+  settings,
+  anchorEl,
+  onClose,
+}) => (
+  <Menu
+    sx={{ mt: "45px" }}
+    id="menu-appbar"
+    anchorEl={anchorEl}
+    anchorOrigin={{
+      vertical: "top",
+      horizontal: "right",
+    }}
+    keepMounted
+    transformOrigin={{
+      vertical: "top",
+      horizontal: "right",
+    }}
+    open={Boolean(anchorEl)}
+    onClose={onClose}
+  >
+    {settings.map((setting) => (
+      <MenuItem key={setting} onClick={onClose}>
+        <Typography textAlign="center">{setting}</Typography>
+      </MenuItem>
+    ))}
+  </Menu>
+);
+
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
-const AppBarNavigation: FunctionComponent = () => {
-  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(
-    null
-  );
-  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(
-    null
-  );
+const AppBarNavigation2: FunctionComponent = () => {
+  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget);
-  };
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
   };
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
 
+  const { state, dispatch } = useContext(ChatContext);
+
+  // Set the state of Component B
+  const setDrawerState = () => {
+    dispatch({ type: SET_DRAWER_STATE, payload: !state.mobileDrawerOpen });
+  };
+
   return (
-    <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
+    <AppBar
+      position="fixed"
+      sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
+    >
       <div>
         <Toolbar disableGutters>
-          <Box sx={{ ml: 2, display: { xs: "none", md: "flex" }, mr: 1, justifySelf: "flex-start" }}>
+          <Box
+            sx={{
+              ml: 2,
+              display: { xs: "none", md: "flex" },
+              mr: 1,
+              justifySelf: "flex-start",
+            }}
+          >
             <img alt="" src="/logo50.svg" />
           </Box>
           <Typography
@@ -70,39 +147,14 @@ const AppBarNavigation: FunctionComponent = () => {
               aria-label="account of current user"
               aria-controls="menu-appbar"
               aria-haspopup="true"
-              onClick={handleOpenNavMenu}
+              onClick={setDrawerState}
               color="inherit"
             >
               <MenuIcon />
             </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: "block", md: "none" },
-              }}
-            >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
           </Box>
-          <Box sx={{ display: { xs: "flex", md: "none" }, mr: 1 }}>
-            <img alt="" src="/logo50.svg" />
-          </Box>
+          <Box sx={{ display: { xs: "flex", md: "none" }, mr: 1 }}></Box>
+
           <Typography
             variant="h6"
             noWrap
@@ -121,37 +173,18 @@ const AppBarNavigation: FunctionComponent = () => {
           >
             Play With ChatGPT
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-          </Box>
-
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}></Box>
           <Box sx={{ flexGrow: 0 }} marginRight={2}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
               </IconButton>
             </Tooltip>
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
+            <UserMenu
+              settings={settings}
               anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
+            />
           </Box>
         </Toolbar>
       </div>
@@ -159,4 +192,4 @@ const AppBarNavigation: FunctionComponent = () => {
   );
 };
 
-export default AppBarNavigation;
+export default AppBarNavigation2;

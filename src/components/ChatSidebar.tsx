@@ -1,7 +1,5 @@
 import { FunctionComponent, useContext, useEffect } from "react";
 import {
-  Box,
-  Button,
   Divider,
   Drawer,
   List,
@@ -11,19 +9,27 @@ import {
   ListItemText,
   Toolbar,
 } from "@mui/material";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
-import { ChatContext, SET_DRAWER_STATE } from "../context/ChatProvider";
+import AddCommentIcon from "@mui/icons-material/AddComment";
+import { ChatContext, SET_DRAWER_STATE, SET_NEW_CHAT_DIALOG_STATE } from "../context/ChatProvider";
+import NewChatDialog from "../dialogs/NewChatDialog";
 
 const ChatSidebar: FunctionComponent = () => {
   const drawerWidth = 240;
   const { state, dispatch } = useContext(ChatContext);
 
-  // Set the state of Component B
+  // Set the state of the Mobile Drawer
   const setDrawerState = () => {
     dispatch({ type: SET_DRAWER_STATE, payload: !state.mobileDrawerOpen });
   };
 
+  // Set the state of the New Chat Dialog
+  const openNewChatDialog = () => {
+    dispatch({
+      type: SET_NEW_CHAT_DIALOG_STATE,
+      payload: true,
+    });
+  };
+  
   useEffect(() => {
     console.log("state.mobileDrawerOpen", state.mobileDrawerOpen);
   }, [state.mobileDrawerOpen]);
@@ -33,30 +39,16 @@ const ChatSidebar: FunctionComponent = () => {
       <Toolbar />
       <Divider />
       <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
+        <ListItem key="New Chat" disablePadding>
+          <ListItemButton onClick={openNewChatDialog}>
+            <ListItemIcon>
+              <AddCommentIcon />
+            </ListItemIcon>
+            <ListItemText primary={"New Chat"} />
+          </ListItemButton>
+        </ListItem>
       </List>
-      <Divider />
-      <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
+      <NewChatDialog />
     </div>
   );
 

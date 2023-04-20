@@ -4,7 +4,7 @@ import AppBarNavigation from "../components/AppBarNavigation";
 import Main from "../components/ChatMainBox";
 import Footer from "../components/ChatInputBox";
 import { Box, Toolbar } from "@mui/material";
-import AppBarNavigation2 from "../components/AppBarNavigation2";
+import AppBarNavigation2 from "../components/AppBarNavigation";
 
 const ChatPage: FunctionComponent = () => {
   return (
