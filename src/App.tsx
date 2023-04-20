@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import {
   Routes,
   Route,
@@ -5,7 +6,7 @@ import {
   useLocation,
 } from "react-router-dom";
 import ChatPage from "./pages/ChatPage";
-import { useEffect } from "react";
+import StateProvider from "./context/ChatProvider";
 
 function App() {
   const action = useNavigationType();
@@ -44,9 +45,11 @@ function App() {
   }, [pathname]);
 
   return (
-    <Routes>
-      <Route path="/" element={<ChatPage />} />
-    </Routes>
+    <StateProvider>
+      <Routes>
+        <Route path="/" element={<ChatPage />} />
+      </Routes>
+    </StateProvider>
   );
 }
 export default App;

@@ -11,8 +11,17 @@ import {
 } from "@mui/material";
 
 import "./global.css";
+import { blueGrey, grey } from "@mui/material/colors";
 
-const muiTheme = createTheme();
+const muiTheme = createTheme({
+  palette: {
+    primary: grey,
+    secondary: {
+      main: blueGrey[500]
+    },
+    mode: 'light',
+  },
+});
 
 const container = document.getElementById("root");
 const root = createRoot(container!);
